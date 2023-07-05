@@ -4,5 +4,27 @@ spring:
     username: root
     password: 20011118
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.163.com
+    password: WPEUJPCKOTXJHWKM
+    username: redis_validate_007@163.com
+    port: 465
+    properties:
+      from: redis_validate_007@163.com
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  data:
+    redis:
+      host: 192.168.2.10
+      password: 20011118
+      port: 6379
+      client-type: lettuce
+
+
+
+
+
 server:
   port: 45372
