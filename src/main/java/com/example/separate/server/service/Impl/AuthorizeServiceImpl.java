@@ -1,6 +1,6 @@
 package com.example.separate.server.service.Impl;
 
-import com.example.separate.server.entity.Account;
+import com.example.separate.server.entity.auth.Account;
 import com.example.separate.server.mapper.UserMapper;
 import com.example.separate.server.service.AuthorizeService;
 import jakarta.annotation.Resource;
@@ -102,9 +102,6 @@ public class AuthorizeServiceImpl implements AuthorizeService {
             if(s.equals(code)){
                 password = bCryptPasswordEncoder.encode(password);
                 redisTemplate.delete(key);
-                Account account = userMapper.findAccountByNameOrEmail(username);
-                if(account!=null)
-                    return "用户名已被占用！";
                 if(userMapper.CreateAccount(username, password, email)>0){
                     return null;
                 }else {
@@ -140,6 +137,11 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     public boolean resetPassword(String password, String email) {
         password = bCryptPasswordEncoder.encode(password);
         return userMapper.resetPasswordByEmail(password, email)>0;
+    }
+
+    @Override
+    public boolean check_username(String username) {
+        return userMapper.selectUserName(username)>0;
     }
 }
 

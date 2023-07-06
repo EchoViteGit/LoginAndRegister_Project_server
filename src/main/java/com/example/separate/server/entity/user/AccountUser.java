@@ -1,4 +1,4 @@
-package com.example.separate.server.entity;
+package com.example.separate.server.entity.user;
 
 import lombok.Data;
 
@@ -7,12 +7,12 @@ import lombok.Data;
  *
  * @author 郭宏洋
  * @version 1.0.0
- * @DateTime 2023/7/3 22:03
+ * @DateTime 2023/7/6 17:51
  */
+
 @Data
-public class Account {
+public class AccountUser {
     int id;
     String username;
-    String password;
     String email;
 }

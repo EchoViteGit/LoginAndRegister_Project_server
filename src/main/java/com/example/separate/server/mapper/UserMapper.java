@@ -1,6 +1,7 @@
 package com.example.separate.server.mapper;
 
-import com.example.separate.server.entity.Account;
+import com.example.separate.server.entity.auth.Account;
+import com.example.separate.server.entity.user.AccountUser;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,4 +24,10 @@ public interface UserMapper {
 
     @Update("update db_account set password = #{password} where email = #{email}")
     int resetPasswordByEmail(String password,String email);
+
+    @Select("select count(*) from db_account where username = #{username}")
+    int selectUserName(String username);
+
+    @Select("select * from db_account where username = #{text} or email = #{text}")
+    AccountUser findAccountUserByNameOrEmail(String text);
 }

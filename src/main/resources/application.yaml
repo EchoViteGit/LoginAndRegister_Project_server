@@ -17,7 +17,7 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
   data:
     redis:
-      host: 192.168.2.10
+      host: 192.168.75.128
       password: 20011118
       port: 6379
       client-type: lettuce

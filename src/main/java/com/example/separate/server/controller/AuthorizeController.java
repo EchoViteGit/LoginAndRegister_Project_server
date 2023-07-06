@@ -30,6 +30,15 @@ public class AuthorizeController {
     @Resource
     AuthorizeService service;
 
+    @PostMapping("/check-username")
+    public RestBean<String> check_username(String username){
+        boolean checked = service.check_username(username);
+        if(!checked){
+            return RestBean.success("用户名可以使用！");
+        }else{
+            return RestBean.failure(400,"用户名已存在！");
+        }
+    }
     @PostMapping("/valid-register-email")
     public RestBean<String> validateEmail(@Pattern(regexp = EMAIL_REGEX)  @RequestParam("email") String email, @NotNull HttpSession session){
         String message = service.sendValidateEmail(email,session.getId(),false);
