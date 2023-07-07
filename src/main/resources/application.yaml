@@ -22,9 +22,5 @@ spring:
       port: 6379
       client-type: lettuce
 
-
-
-
-
 server:
   port: 45372
