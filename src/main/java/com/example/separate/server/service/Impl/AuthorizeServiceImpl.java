@@ -15,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -79,8 +81,14 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(email);
-        message.setSubject("欢迎使用VUE平台");
-        message.setText("你的注册验证码为："+code);
+        message.setSubject("你正在进行用户注册！！！");
+        Date date = new Date();
+        String dateTime = DateFormatUtils.format(date, "yyyy-MM-dd HH:mm:SS");
+        message.setText("欢迎您！！！\n"+
+                "\n您的邮箱是："+email +
+                "\n\n您的验证码为："+code +
+                "\n\n该验证码于  \n\t\t" + dateTime +
+                "  发送，有效期3分钟！");
         try {
             mailSender.send(message);
             redisTemplate.opsForValue().set(key,String.valueOf(code),3, TimeUnit.MINUTES);
