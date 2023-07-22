@@ -81,14 +81,16 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(email);
-        message.setSubject("你正在进行用户注册！！！");
+        message.setSubject("欢迎您使用本系统!");
         Date date = new Date();
         String dateTime = DateFormatUtils.format(date, "yyyy-MM-dd HH:mm:SS");
         message.setText("欢迎您！！！\n"+
                 "\n您的邮箱是："+email +
-                "\n\n您的验证码为："+code +
-                "\n\n该验证码于  \n\t\t" + dateTime +
-                "  发送，有效期3分钟！");
+                "\n\n您的验证码为：\n\n\n"+
+                "<h1>"+code+"</h1>\n" +
+                "\n\n该验证码于  \n\n" + dateTime +
+                "  发送\n"+
+                "\n您的验证码使用有效时间为3分钟!");
         try {
             mailSender.send(message);
             redisTemplate.opsForValue().set(key,String.valueOf(code),3, TimeUnit.MINUTES);
