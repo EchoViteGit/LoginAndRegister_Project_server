@@ -87,7 +87,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         message.setText("欢迎您！！！\n"+
                 "\n您的邮箱是："+email +
                 "\n\n您的验证码为：\n\n\n"+
-                "<h1>"+code+"</h1>\n" +
+                "<h1 style=\"red\">"+code+"</h1>\n" +
                 "\n\n该验证码于  \n\n" + dateTime +
                 "  发送\n"+
                 "\n您的验证码使用有效时间为3分钟!");
